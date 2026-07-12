@@ -57,82 +57,14 @@ th {
 }
 
 #th-left {
-    border-radius: 8px 0 0 8px;
+    border-top-left-radius: 8px;
 }
 
 #th-right {
-    border-radius: 0 8px 8px 0;
+    border-top-right-radius: 8px;
 }
 
 .marked {
     font-weight: bold;
     color: light-dark(var(--highlight-color-light), var(--highlight-color-dark));
-}
-
-
-
-
-
-
- /* body {
-     color: light-dark(var(--font-color-light), var(--font-color-dark));
-     background-color: light-dark(var(--bg-color-light), var(--bg-color-dark));
-     display: flex;
-     align-items: center;
-     justify-content: center;
- }
-
- .container {
-     width: 420px;
-     padding: 20px 24px;
- }
-
- .control-group {
-     display: grid;
-     grid-template-columns: 140px 1fr;
-     gap: 6px 12px;
-     margin-bottom: 20px;
-     align-items: center;
- }
-
- .inline {
-     display: flex;
-     gap: 4px;
-     align-items: center;
- }
-
- .output-group {
-     display: grid;
-     grid-template-columns: 1fr auto;
-     row-gap: 8px;
-     column-gap: 16px;
-     font-weight: 600;
- }
-
- .output-group .val {
-     text-align: left;
-     font-variant-numeric: tabular-nums;
-     color: light-dark(var(--highlight-color-light), var(--highlight-color-dark));
- }
-
- input,
- select {
-     margin: 5px;
-     color: light-dark(var(--highlight-color-light), var(--highlight-color-dark));
- }
-
- .credits {
-     font-size: x-small;
-     color: light-dark(var(--font-color-light), var(--font-color-dark));
-     margin-top: 20px;
- }
-
- a:link {
-     text-decoration: none;
-     color: light-dark(var(--highlight-color-light), var(--highlight-color-dark));;
- }
-
- a:visited {
-     text-decoration: none;
-     color: light-dark(var(--highlight-color-light), var(--highlight-color-dark));;
- } */
+} 
