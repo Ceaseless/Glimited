@@ -1,0 +1,138 @@
+* {
+     font-family: "Meiryo UI", sans-serif;
+ }
+
+:root {
+     color-scheme: light dark;
+     --bg-color-light: #fcfcfc;
+     --bg-color-dark: #161923;
+     --container-color-dark: #0d0f16;
+     --container-color-light: #cccccc;
+     --font-color-light: #292524;
+     --font-color-dark: #BCBDD0;
+     --highlight-color-light: #597700;
+     --highlight-color-dark: #FFCA57;
+ }
+
+body {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 0 20px;
+    color: light-dark(var(--font-color-light), var(--font-color-dark));
+    background-color: light-dark(var(--bg-color-light), var(--bg-color-dark));
+}
+
+h1 {
+    text-align: center;
+}
+
+.current {
+    background: light-dark(var(--container-color-light), var(--container-color-dark));
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;    
+}
+
+.current #active-quest {
+    font-weight: bold;
+    color: light-dark(var(--highlight-color-light), var(--highlight-color-dark));
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    padding: 12px;
+    text-align: left;
+    background: light-dark(var(--container-color-light), var(--container-color-dark));
+}
+
+#th-left {
+    border-radius: 8px 0 0 8px;
+}
+
+#th-right {
+    border-radius: 0 8px 8px 0;
+}
+
+.marked {
+    font-weight: bold;
+    color: light-dark(var(--highlight-color-light), var(--highlight-color-dark));
+}
+
+
+
+
+
+
+ /* body {
+     color: light-dark(var(--font-color-light), var(--font-color-dark));
+     background-color: light-dark(var(--bg-color-light), var(--bg-color-dark));
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
+
+ .container {
+     width: 420px;
+     padding: 20px 24px;
+ }
+
+ .control-group {
+     display: grid;
+     grid-template-columns: 140px 1fr;
+     gap: 6px 12px;
+     margin-bottom: 20px;
+     align-items: center;
+ }
+
+ .inline {
+     display: flex;
+     gap: 4px;
+     align-items: center;
+ }
+
+ .output-group {
+     display: grid;
+     grid-template-columns: 1fr auto;
+     row-gap: 8px;
+     column-gap: 16px;
+     font-weight: 600;
+ }
+
+ .output-group .val {
+     text-align: left;
+     font-variant-numeric: tabular-nums;
+     color: light-dark(var(--highlight-color-light), var(--highlight-color-dark));
+ }
+
+ input,
+ select {
+     margin: 5px;
+     color: light-dark(var(--highlight-color-light), var(--highlight-color-dark));
+ }
+
+ .credits {
+     font-size: x-small;
+     color: light-dark(var(--font-color-light), var(--font-color-dark));
+     margin-top: 20px;
+ }
+
+ a:link {
+     text-decoration: none;
+     color: light-dark(var(--highlight-color-light), var(--highlight-color-dark));;
+ }
+
+ a:visited {
+     text-decoration: none;
+     color: light-dark(var(--highlight-color-light), var(--highlight-color-dark));;
+ } */
