@@ -26,7 +26,7 @@ function generateSchedule(days = 10) {
     const todayTimestamp = Date.now();
     const diff = todayTimestamp - referenceTimestamp.unixTimestamp;
 
-    for (let i = 0; i < days; i++) {
+    for (let i = 1; i <= days; i++) {
         const activation = new Date(referenceDate);
         activation.setDate(activation.getDate() + Math.floor(diff / oneDay) + i);
 
