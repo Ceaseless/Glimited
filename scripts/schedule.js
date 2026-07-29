@@ -1,4 +1,5 @@
 const quests = ["古龍三昧", "烈種三昧", "超希少", "吹き荒ぶ新風", "始種三昧", "遠き地より"];
+const questsEN = ["Elder Dragon Trio", "Burst Species Trio", "Rare Species", "MHFZ Newcomers", "Origin Trio", "Exotics"]
 const monsters = [
     "Chameleos, Teostra, Kushala Daora",
     "Zerureusu, Meraginasu, Diorex, Garuba Daora, Varusaburosu",
@@ -9,6 +10,7 @@ const monsters = [
 ];
 
 const oneDay = (24 * 60 * 60 * 1000);
+const markedQuestIndex = 2; // 超希少 = 2
 
 // 超希少 was active at this JST time -> Calculate rotation from this
 const referenceTimestamp = {
@@ -41,7 +43,7 @@ function generateSchedule(days = 10) {
     return schedule;
 }
 
-function getCurrentItem() {
+function getCurrentQuestIndex() {
     const now = new Date();
 
     const referenceDate = new Date(referenceTimestamp.utcTimestamp);
@@ -56,7 +58,7 @@ function getCurrentItem() {
     }
 
     const index = (startIndex + daysElapsed) % quests.length;
-    return { quest: quests[index], monsters: monsters[index] };
+    return index;
 }
 
 function formatDate(timestamp) {
@@ -81,8 +83,7 @@ function renderSchedule() {
 
     schedule.forEach(entry => {
         const row = document.createElement("tr");
-        // index 2 = 超希少 
-        if (entry.questIndex === 2) {
+        if (entry.questIndex === markedQuestIndex) {
             row.setAttribute("class", "marked");
         }
 
@@ -96,10 +97,15 @@ function renderSchedule() {
     });
 }
 
-function updateCurrentItem() {
-    const item = getCurrentItem()
-    document.getElementById("active-quest").innerHTML = `${item.quest}<br>(${item.monsters})`;
+// Probably could just pick the first one from the schedule list instead
+function updateCurrentQuest() {
+    const questIndex = getCurrentQuestIndex()
+    const elem = document.getElementById("active-quest")
+    if (questIndex === markedQuestIndex) {
+        elem.setAttribute("class","rainbow-text")
+    }    
+    elem.innerHTML = `${quests[questIndex]}<br>(${monsters[questIndex]})`;
 }
 
 renderSchedule();
-updateCurrentItem();
+updateCurrentQuest();

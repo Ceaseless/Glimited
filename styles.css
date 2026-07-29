@@ -1,18 +1,18 @@
 * {
-     font-family: "Meiryo UI", sans-serif;
- }
+    font-family: "Meiryo UI", sans-serif;
+}
 
 :root {
-     color-scheme: light dark;
-     --bg-color-light: #fcfcfc;
-     --bg-color-dark: #161923;
-     --container-color-dark: #0d0f16;
-     --container-color-light: #cccccc;
-     --font-color-light: #292524;
-     --font-color-dark: #BCBDD0;
-     --highlight-color-light: #597700;
-     --highlight-color-dark: #FFCA57;
- }
+    color-scheme: light dark;
+    --bg-color-light: #fcfcfc;
+    --bg-color-dark: #161923;
+    --header-color-dark: #0f111a;
+    --header-color-light: #cccccc;
+    --font-color-light: #292524;
+    --font-color-dark: #BCBDD0;
+    --highlight-color-light: #597700;
+    --highlight-color-dark: #FFCA57;
+}
 
 body {
     max-width: 600px;
@@ -27,11 +27,11 @@ h1 {
 }
 
 .current {
-    background: light-dark(var(--container-color-light), var(--container-color-dark));
+    background: light-dark(var(--header-color-light), var(--header-color-dark));
     padding: 15px;
     border-radius: 8px;
     margin-bottom: 20px;
-    text-align: center;    
+    text-align: center;
 }
 
 .current #active-quest {
@@ -48,12 +48,13 @@ td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
+    /* background-color: light-dark(var(--container-color-light), var(--container-color-dark)); */
 }
 
 th {
     padding: 12px;
     text-align: left;
-    background: light-dark(var(--container-color-light), var(--container-color-dark));
+    background: light-dark(var(--header-color-light), var(--header-color-dark));
 }
 
 #th-left {
@@ -67,4 +68,30 @@ th {
 .marked {
     font-weight: bold;
     color: light-dark(var(--highlight-color-light), var(--highlight-color-dark));
-} 
+}
+
+.rainbow-text {
+    max-width: 45rem;
+    background-image: linear-gradient(to right,
+            #ff7b7b,
+            #ffb347,
+            #ffe84d,
+            #6ee86b,
+            #4ddfff,
+            #8c7cff,
+            #ff7b7b);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    background-size: 200% auto;
+
+    font-weight: bold;
+    animation: rainbow 4s linear infinite
+}
+
+@keyframes rainbow {
+    to {
+        background-position: 200% center
+    }
+}
