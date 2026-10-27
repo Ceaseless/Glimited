@@ -84,7 +84,7 @@ function renderSchedule() {
     schedule.forEach(entry => {
         const row = document.createElement("tr");
         if (entry.questIndex === markedQuestIndex) {
-            row.setAttribute("class", "marked");
+            row.setAttribute("class", "rainbow-text");
         }
 
         row.innerHTML = `
