@@ -66,11 +66,6 @@ th {
 }
 
 .marked {
-    font-weight: bold;
-    color: light-dark(var(--highlight-color-light), var(--highlight-color-dark));
-}
-
-.rainbow-text {
     max-width: 45rem;
     background-image: linear-gradient(to right,
             #ff7b7b,

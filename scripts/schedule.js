@@ -9,56 +9,37 @@ const monsters = [
     "Stygian Zinogre, Gore Magala, Shagaru Magala"
 ];
 
-const oneDay = (24 * 60 * 60 * 1000);
-const markedQuestIndex = 2; // 超希少 = 2
+// questIndex = floor((timestamp + 0x7e90) / 0x15180) % 6 (Function: +0x405b30)
+// Quest order is the same as ferias' list
 
-// 超希少 was active at this JST time -> Calculate rotation from this
-const referenceTimestamp = {
-    quest: "超希少",
-    unixTimestamp: 1783436400000,
-    utcTimestamp: "2026-07-08T00:00:00+09:00"
-};
+const DAY_SECONDS = 24 * 60 * 60;
+const JST_OFFSET_SECONDS = 9 * 60 * 60;
+const MARKED_QUEST_INDEX = 2; // 超希少 = 2
 
-function generateSchedule(days = 10) {
+// Date.now() is in milliseconds
+function getJstDayNumber(nowMs) {
+    return Math.floor((nowMs / 1000 + JST_OFFSET_SECONDS) / DAY_SECONDS);
+}
+
+function generateSchedule(days = 10, nowMs = Date.now()) {
+    const today = getJstDayNumber(nowMs);
     const schedule = [];
 
-    const startIndex = quests.indexOf(referenceTimestamp.quest);
-    const referenceDate = new Date(referenceTimestamp.utcTimestamp);
-
-    const todayTimestamp = Date.now();
-    const diff = todayTimestamp - referenceTimestamp.unixTimestamp;
-
     for (let i = 1; i <= days; i++) {
-        const activation = new Date(referenceDate);
-        activation.setDate(activation.getDate() + Math.floor(diff / oneDay) + i);
-
-        const questIndex = (startIndex + Math.floor(diff / oneDay) + i) % quests.length;
+        const day = today + i;
 
         schedule.push({
-            questIndex: questIndex,
-            activation: activation.toISOString()
+            questIndex: day % quests.length,
+            // Back to milliseconds
+            activation: new Date((day * DAY_SECONDS - JST_OFFSET_SECONDS) * 1000).toISOString()
         });
-    }
 
+    }
     return schedule;
 }
 
-function getCurrentQuestIndex() {
-    const now = new Date();
-
-    const referenceDate = new Date(referenceTimestamp.utcTimestamp);
-    const startIndex = quests.indexOf(referenceTimestamp.quest);
-
-    let daysElapsed = Math.floor(
-        (now - referenceDate) / oneDay
-    );
-
-    if (daysElapsed < 0) {
-        daysElapsed = 0;
-    }
-
-    const index = (startIndex + daysElapsed) % quests.length;
-    return index;
+function getCurrentQuestIndex(nowMs = Date.now()) {
+    return getJstDayNumber(nowMs) % quests.length;
 }
 
 function formatDate(timestamp) {
@@ -83,8 +64,8 @@ function renderSchedule() {
 
     schedule.forEach(entry => {
         const row = document.createElement("tr");
-        if (entry.questIndex === markedQuestIndex) {
-            row.setAttribute("class", "rainbow-text");
+        if (entry.questIndex === MARKED_QUEST_INDEX) {
+            row.setAttribute("class", "marked");
         }
 
         row.innerHTML = `
@@ -101,9 +82,9 @@ function renderSchedule() {
 function updateCurrentQuest() {
     const questIndex = getCurrentQuestIndex()
     const elem = document.getElementById("active-quest")
-    if (questIndex === markedQuestIndex) {
-        elem.setAttribute("class","rainbow-text")
-    }    
+    if (questIndex === MARKED_QUEST_INDEX) {
+        elem.setAttribute("class", "marked")
+    }
     elem.innerHTML = `${quests[questIndex]}<br>(${monsters[questIndex]})`;
 }
 
